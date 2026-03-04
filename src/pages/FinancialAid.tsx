@@ -96,12 +96,27 @@ const FinancialAid = () => {
             </div>
             <Button onClick={calculate} className="w-full sm:w-auto">Calculate Interest</Button>
             {interest !== null && (
-              <div className="rounded-lg bg-accent p-4">
-                <p className="text-sm text-muted-foreground">Total Interest Payable</p>
-                <p className="text-2xl font-bold text-primary">₹{interest.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Total Repayment: ₹{(parseFloat(principal) + interest).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
-                </p>
+              <div className="space-y-3">
+                <div className="rounded-lg bg-accent p-4">
+                  <p className="text-sm text-muted-foreground">Total Interest Payable</p>
+                  <p className="text-2xl font-bold text-primary">₹{interest.toLocaleString("en-IN", { maximumFractionDigits: 0 })}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Total Repayment: ₹{(parseFloat(principal) + interest).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                  </p>
+                </div>
+                {parseFloat(rate) > 3 && (
+                  <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+                    <p className="text-sm font-semibold text-primary">💡 PM-Vidyalaxmi Savings</p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      With PM-Vidyalaxmi's 3% interest subvention, your effective rate drops to {(parseFloat(rate) - 3).toFixed(1)}%.
+                    </p>
+                    <p className="text-sm mt-1">
+                      <span className="font-bold text-primary">You save ₹{(parseFloat(principal) * 0.03 * parseFloat(years)).toLocaleString("en-IN", { maximumFractionDigits: 0 })}</span>
+                      <span className="text-muted-foreground"> on interest!</span>
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">Example: On a ₹10L loan at 8% for 4 years, you save ₹1,20,000 with PM-Vidyalaxmi.</p>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
