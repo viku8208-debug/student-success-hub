@@ -9,6 +9,7 @@ import MentalHealth from "./pages/MentalHealth";
 import FinancialAid from "./pages/FinancialAid";
 import ExamCalendar from "./pages/ExamCalendar";
 import CareerLab from "./pages/CareerLab";
+import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/financial-aid" element={<FinancialAid />} />
             <Route path="/exam-calendar" element={<ExamCalendar />} />
             <Route path="/career-lab" element={<CareerLab />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppLayout>

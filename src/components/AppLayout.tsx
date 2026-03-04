@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Heart, Calculator, CalendarDays, Briefcase, Menu, X } from "lucide-react";
+import { Heart, Calculator, CalendarDays, Briefcase, BookOpen, Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
@@ -7,6 +7,7 @@ const navItems = [
   { to: "/financial-aid", label: "Financial Aid", icon: Calculator },
   { to: "/exam-calendar", label: "Exam Calendar", icon: CalendarDays },
   { to: "/career-lab", label: "Career Lab", icon: Briefcase },
+  { to: "/resources", label: "Resources", icon: BookOpen },
 ];
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {

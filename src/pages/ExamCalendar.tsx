@@ -1,11 +1,11 @@
-import { CalendarDays, Clock, MapPin } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const exams = [
   {
     name: "JEE Main 2026 — Session 1",
-    date: "January 2026",
+    date: "January 21–30, 2026",
     status: "upcoming" as const,
     details: "B.E./B.Tech, B.Arch, B.Planning entrance. Apply via jeemain.nta.nic.in",
     tip: "Focus on NCERT + previous year papers. Start revision by November 2025.",
@@ -46,12 +46,10 @@ const ExamCalendar = () => {
           <Card key={i} className="shadow-card overflow-hidden">
             <CardContent className="p-0">
               <div className="flex flex-col sm:flex-row">
-                {/* Date strip */}
-                <div className="flex items-center gap-3 gradient-primary px-4 py-3 sm:w-48 sm:flex-col sm:justify-center sm:gap-1">
+                <div className="flex items-center gap-3 gradient-primary px-4 py-3 sm:w-52 sm:flex-col sm:justify-center sm:gap-1">
                   <CalendarDays size={18} className="text-primary-foreground" />
                   <span className="text-sm font-bold text-primary-foreground">{exam.date}</span>
                 </div>
-                {/* Content */}
                 <div className="flex-1 p-4 space-y-2">
                   <div className="flex items-start justify-between gap-2">
                     <h3 className="font-semibold">{exam.name}</h3>
