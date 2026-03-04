@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IndianRupee, GraduationCap, Calculator } from "lucide-react";
+import { IndianRupee, GraduationCap, Calculator, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,18 +11,28 @@ const scholarships = [
     amount: "₹75,000 – ₹1,25,000/year",
     eligibility: "OBC, EBC, DNT students; family income < ₹2.5 LPA",
     details: "Covers tuition, hostel, and maintenance. Apply via National Scholarship Portal (NSP).",
+    link: "https://scholarships.gov.in",
+  },
+  {
+    name: "National Scholarship Portal (NSP)",
+    amount: "Varies by scheme",
+    eligibility: "All categories — SC, ST, OBC, Minority, EBC students",
+    details: "One-stop portal for 100+ central & state scholarships. Pre-matric, post-matric, and merit-based schemes available.",
+    link: "https://scholarships.gov.in",
   },
   {
     name: "Bihar Post Matric Scholarship",
     amount: "Varies by course",
-    eligibility: "BC, EBC, SC, ST students domiciled in Bihar",
+    eligibility: "BC, EBC, SC, ST students domiciled in Bihar; family income < ₹2.5 LPA",
     details: "Covers tuition fees and maintenance allowance for post-matric studies. Apply via Bihar state portal.",
+    link: "https://pmsonline.bih.nic.in",
   },
   {
     name: "PM-Vidyalaxmi (3% Interest Subvention)",
     amount: "3% interest subsidy on education loans",
     eligibility: "Students from families with income < ₹8 LPA; loan up to ₹10 lakh",
     details: "Government pays 3% of the interest on your education loan. Available at nationalized banks.",
+    link: "https://www.vidyalakshmi.co.in",
   },
 ];
 
@@ -45,7 +55,7 @@ const FinancialAid = () => {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-bold md:text-3xl">💰 Financial Aid Navigator</h1>
-        <p className="mt-1 text-muted-foreground">Find scholarships and calculate your loan costs.</p>
+        <p className="mt-1 text-muted-foreground">Find scholarships and calculate your loan savings.</p>
       </div>
 
       {/* Scholarships */}
@@ -66,16 +76,24 @@ const FinancialAid = () => {
                 </div>
                 <p className="text-sm text-muted-foreground"><strong>Eligibility:</strong> {s.eligibility}</p>
                 <p className="text-sm text-muted-foreground">{s.details}</p>
+                <a
+                  href={s.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                >
+                  Apply / Learn More <ExternalLink size={12} />
+                </a>
               </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Loan Calculator */}
+      {/* Loan Savings Calculator */}
       <section className="space-y-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <Calculator size={20} className="text-primary" /> Loan Interest Calculator
+          <Calculator size={20} className="text-primary" /> Loan Savings Calculator
         </h2>
         <Card className="shadow-card">
           <CardContent className="pt-4 space-y-4">
@@ -83,11 +101,11 @@ const FinancialAid = () => {
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <Label htmlFor="principal" className="text-xs">Principal (₹)</Label>
-                <Input id="principal" type="number" placeholder="e.g. 500000" value={principal} onChange={(e) => setPrincipal(e.target.value)} />
+                <Input id="principal" type="number" placeholder="e.g. 1000000" value={principal} onChange={(e) => setPrincipal(e.target.value)} />
               </div>
               <div>
                 <Label htmlFor="rate" className="text-xs">Rate (%/year)</Label>
-                <Input id="rate" type="number" placeholder="e.g. 8.5" value={rate} onChange={(e) => setRate(e.target.value)} />
+                <Input id="rate" type="number" placeholder="e.g. 8" value={rate} onChange={(e) => setRate(e.target.value)} />
               </div>
               <div>
                 <Label htmlFor="years" className="text-xs">Duration (years)</Label>
@@ -95,6 +113,15 @@ const FinancialAid = () => {
               </div>
             </div>
             <Button onClick={calculate} className="w-full sm:w-auto">Calculate Interest</Button>
+
+            {/* PM-Vidyalaxmi highlight */}
+            <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+              <p className="text-sm font-semibold text-primary">💡 PM-Vidyalaxmi Savings</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Under PM-Vidyalaxmi, you can save 3% interest — that's <strong className="text-primary">₹1,20,000 on a ₹10 Lakh loan over 4 years</strong>.
+              </p>
+            </div>
+
             {interest !== null && (
               <div className="space-y-3">
                 <div className="rounded-lg bg-accent p-4">
@@ -105,16 +132,14 @@ const FinancialAid = () => {
                   </p>
                 </div>
                 {parseFloat(rate) > 3 && (
-                  <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-                    <p className="text-sm font-semibold text-primary">💡 PM-Vidyalaxmi Savings</p>
+                  <div className="rounded-lg bg-accent p-4">
+                    <p className="text-sm font-semibold text-primary">With PM-Vidyalaxmi (3% subvention)</p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      With PM-Vidyalaxmi's 3% interest subvention, your effective rate drops to {(parseFloat(rate) - 3).toFixed(1)}%.
+                      Effective rate: {(parseFloat(rate) - 3).toFixed(1)}% · You save{" "}
+                      <strong className="text-primary">
+                        ₹{(parseFloat(principal) * 0.03 * parseFloat(years)).toLocaleString("en-IN", { maximumFractionDigits: 0 })}
+                      </strong>
                     </p>
-                    <p className="text-sm mt-1">
-                      <span className="font-bold text-primary">You save ₹{(parseFloat(principal) * 0.03 * parseFloat(years)).toLocaleString("en-IN", { maximumFractionDigits: 0 })}</span>
-                      <span className="text-muted-foreground"> on interest!</span>
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-2">Example: On a ₹10L loan at 8% for 4 years, you save ₹1,20,000 with PM-Vidyalaxmi.</p>
                   </div>
                 )}
               </div>
