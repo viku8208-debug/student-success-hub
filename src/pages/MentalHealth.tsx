@@ -14,30 +14,37 @@ const MentalHealth = () => {
       <div>
         <h1 className="text-2xl font-bold md:text-3xl">🧠 Mental Health Sanctuary</h1>
         <p className="mt-1 text-muted-foreground">Your safe space. Help is always available — you are not alone.</p>
+        <div className="mt-3 rounded-lg bg-destructive/10 border border-destructive/20 p-3">
+          <p className="text-sm font-medium text-destructive">📊 Nearly 70% of Indian students report facing anxiety during exam season. You don't have to face it alone — reach out now.</p>
+        </div>
       </div>
 
       {/* Helplines */}
       <section className="space-y-3">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <Phone size={20} className="text-primary" /> 24/7 Helplines
+          <Phone size={20} className="text-primary" /> 24/7 Helplines (Free & Confidential)
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
           <Card className="shadow-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">Tele-MANAS</CardTitle>
             </CardHeader>
-            <CardContent>
-              <a href="tel:14416" className="text-2xl font-bold text-primary hover:underline">14416</a>
-              <p className="mt-1 text-sm text-muted-foreground">Free, 24/7 mental health helpline by Govt. of India. Available in multiple languages.</p>
+            <CardContent className="space-y-2">
+              <p className="text-sm text-muted-foreground">Free, 24/7 mental health helpline by Govt. of India. Available in multiple languages.</p>
+              <a href="tel:14416" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-primary/90 transition-colors">
+                <Phone size={16} /> Call 14416
+              </a>
             </CardContent>
           </Card>
           <Card className="shadow-card">
             <CardHeader className="pb-2">
               <CardTitle className="text-base">NIMHANS</CardTitle>
             </CardHeader>
-            <CardContent>
-              <a href="tel:08046110007" className="text-2xl font-bold text-primary hover:underline">080-46110007</a>
-              <p className="mt-1 text-sm text-muted-foreground">National Institute of Mental Health and Neuro-Sciences, Bangalore. Expert counselling.</p>
+            <CardContent className="space-y-2">
+              <p className="text-sm text-muted-foreground">National Institute of Mental Health and Neuro-Sciences, Bangalore. Expert counselling.</p>
+              <a href="tel:08046110007" className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground hover:bg-primary/90 transition-colors">
+                <Phone size={16} /> Call 080-46110007
+              </a>
             </CardContent>
           </Card>
         </div>
