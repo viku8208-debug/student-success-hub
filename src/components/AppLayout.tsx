@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Heart, Calculator, CalendarDays, Briefcase, BookOpen, Menu, X, LogOut } from "lucide-react";
+import { Heart, Calculator, CalendarDays, Briefcase, BookOpen, Menu, X, LogOut, UserCircle } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -52,9 +52,17 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
               ))}
             </nav>
             {user && (
+              <Link
+                to="/profile"
+                className="ml-1 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+              >
+                <UserCircle size={16} /> Profile
+              </Link>
+            )}
+            {user && (
               <button
                 onClick={logout}
-                className="ml-2 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+                className="ml-1 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
               >
                 <LogOut size={16} /> Logout
               </button>
@@ -79,6 +87,16 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
                 {item.label}
               </Link>
             ))}
+            {user && (
+              <Link to="/profile" onClick={() => setMenuOpen(false)} className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent">
+                <UserCircle size={18} /> Profile
+              </Link>
+            )}
+            {user && (
+              <button onClick={() => { logout(); setMenuOpen(false); }} className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive">
+                <LogOut size={18} /> Logout
+              </button>
+            )}
           </nav>
         )}
       </header>
