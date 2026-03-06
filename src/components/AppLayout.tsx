@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
-import { Heart, Calculator, CalendarDays, Briefcase, BookOpen, Menu, X } from "lucide-react";
+import { Heart, Calculator, CalendarDays, Briefcase, BookOpen, Menu, X, LogOut } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navItems = [
   { to: "/mental-health", label: "Mental Health", icon: Heart },
@@ -13,6 +14,7 @@ const navItems = [
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,22 +34,32 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <nav className="hidden gap-1 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  location.pathname === item.to
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                }`}
+          <div className="hidden items-center gap-1 md:flex">
+            <nav className="flex gap-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    location.pathname === item.to
+                      ? "bg-accent text-accent-foreground"
+                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  }`}
+                >
+                  <item.icon size={16} />
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            {user && (
+              <button
+                onClick={logout}
+                className="ml-2 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
               >
-                <item.icon size={16} />
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+                <LogOut size={16} /> Logout
+              </button>
+            )}
+          </div>
         </div>
         {/* Mobile menu */}
         {menuOpen && (
