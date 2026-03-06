@@ -5,12 +5,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import AppLayout from "@/components/AppLayout";
+import AIChatbot from "@/components/AIChatbot";
 import Index from "./pages/Index";
 import MentalHealth from "./pages/MentalHealth";
 import FinancialAid from "./pages/FinancialAid";
 import ExamCalendar from "./pages/ExamCalendar";
 import CareerLab from "./pages/CareerLab";
 import Resources from "./pages/Resources";
+import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
@@ -41,9 +43,11 @@ const AppRoutes = () => {
                 <Route path="/exam-calendar" element={<ExamCalendar />} />
                 <Route path="/career-lab" element={<CareerLab />} />
                 <Route path="/resources" element={<Resources />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AppLayout>
+            <AIChatbot />
           </ProtectedRoute>
         }
       />
